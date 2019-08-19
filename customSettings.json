@@ -1,0 +1,11 @@
+{
+  "DefaultUserData": {
+    "Firstname": null,
+    "Lastname": null,
+    "Email": "Admin@Admin.com",
+    "Password": "@Admin123123"
+  },
+  "DatabaseOptions": {
+    "ConnectionString": "FurnitureDatabase.sdb"
+  }
+}

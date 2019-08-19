@@ -1,0 +1,66 @@
+@model FurnitureSiteProject_MentorMate.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<span><br><br></span>
+
+<body>
+    <h1 style="">Newest Item</h1>
+    <div class="wrapper" style="float:left;width:720px">
+        <div class="product-img">
+            <img src="@Model.NewestItem.ImagePath" asp-append-version="true" alt="@Model.NewestItem.ImagePath" height="420" width="327"/>
+        </div>
+        <div class="product-info">
+            <div class="product-text">
+                @{string Name = Model.NewestItem.ShortName; }
+                <h1>@Name</h1>
+                <h4></h4>
+                @{string Description = Model.NewestItem.Description; }
+                <p>@Description...</p>
+            </div>
+            <p style="position:relative;left:20px;bottom:20px"><span class="home-price">@Html.DisplayFor(modelItem => Model.NewestItem.Price)</span></p>
+            <div style="position:relative; bottom:20px;left:70px; width:200px">
+                @if (Model.NewestItem.Archived == false)
+                {
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@Model.NewestItem.Id"><button class="form-control" type="button">Add to Cart</button></a>
+                }
+                else
+                {
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@Model.NewestItem.Id"><button class="form-control" style="background-color:darkgray" type="button">Not For Sale</button></a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <h1 style="clear:left">Other Items</h1>
+    <div class="row" style="clear:left">
+        @{int count = 0; }
+        @foreach (var item in Model.Items)
+        {
+            if (count == 8)
+            { break; }
+        <div class="product-card" style="background-color:lightgray;margin-right:50px;max-height:500px;border-radius:10px">
+            <div class="product-card-thumbnail">
+                <img src="@item.ImagePath" asp-append-version="true" alt="@item.ImagePath" style="height:180px;width:180px;border-radius:10px" />
+            </div>
+            <p class="product-card-title" style="">
+                @{string ItemName = item.ShortName;}
+            <p>@ItemName</p>
+            </p>
+            <span class="product-card-price">@Html.DisplayFor(modelItem => item.Price)</span>
+            <div class="product-card-colors">
+                @if (item.Archived == false)
+                {
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id"><button class="form-control" type="button">Add to Cart</button></a>
+                }
+                else
+                {
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id"><button class="form-control" style="background-color:darkgray" type="button">Not For Sale</button></a>
+                }
+            </div>
+        </div>
+                count++;
+            }
+    </div>
+</body>
